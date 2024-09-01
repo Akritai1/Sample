@@ -76,9 +76,13 @@ public class SqlInjectionLesson9 extends AssignmentEndpoint {
       // begin transaction
       connection.setAutoCommit(false);
       // do injectable query
-      Statement statement = connection.createStatement(TYPE_SCROLL_SENSITIVE, CONCUR_UPDATABLE);
+    //  Statement statement = connection.createStatement(TYPE_SCROLL_SENSITIVE, CONCUR_UPDATABLE);
       SqlInjectionLesson8.log(connection, queryInjection);
-      statement.execute(queryInjection);
+      String query2 = "?";
+      PreparedStatement statement2 = connection.preparedStatement(queryInjection);
+      statement2.setString(1, queryInjection);
+     // statement.execute(queryInjection);
+      statement2.executeQuery();
       // check new sum of salaries other employees and new salaries of John
       int newJohnSalary = this.getJohnSalary(connection);
       int newSumSalariesOfOtherEmployees = this.getSumSalariesOfOtherEmployees(connection);
