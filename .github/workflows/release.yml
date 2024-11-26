@@ -37,8 +37,8 @@ jobs:
       - name: Build with Maven
         run: |
           mvn --no-transfer-progress versions:set -DnewVersion=${{ env.WEBGOAT_MAVEN_VERSION }}
-          mvn --no-transfer-progress install -DskipTests
-
+          #mvn --no-transfer-progress install -DskipTests
+          mvn package
       - name: "Create release"
         uses: softprops/action-gh-release@v1
         with:
